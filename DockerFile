@@ -7,6 +7,11 @@ WORKDIR /app
 # Copy the go.mod and go.sum files
 COPY go.mod go.sum ./
 
+RUN curl -fsSLO https://get.docker.com/builds/Linux/x86_64/docker-17.04.0-ce.tgz \
+  && tar xzvf docker-17.04.0-ce.tgz \
+  && mv docker/docker /usr/local/bin \
+  && rm -r docker docker-17.04.0-ce.tgz
+
 # Download the Go modules
 RUN go mod download
 
